@@ -43,7 +43,8 @@ class Scheduler:
         self.settings.load_settings()
 
     def main_menu(self):
-        tips = dedent(f'''
+        tips = dedent(
+            f'''
             {'='*25}
             1. 复制粘贴写入 Cookie
             2. 修改配置文件(Linux)
@@ -51,8 +52,7 @@ class Scheduler:
             3. 批量下载账号作品(配置文件)
             {'='*25}
 
-            请选择运行模式：
-            ''')
+            请选择运行模式：''')
         while (mode := Prompt.ask(f'[{CYAN}]{tips}', choices=['q', '1', '2', '3'], default='3')) != 'q':
             if mode == '1':
                 self.cookie.input_save()
