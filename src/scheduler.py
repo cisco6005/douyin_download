@@ -76,6 +76,8 @@ class Scheduler:
             rmtree(self.cache_folder)
             self.download_recorder.delete()
             self.download_items.delete()
+        except:
+            pass
         finally:
             print(f'[{WHITE}]程序结束运行')
 
