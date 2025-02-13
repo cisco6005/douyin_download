@@ -27,11 +27,10 @@ class Acquire():
         '''获取账号作品数据并返回'''
         items = []
         with self._progress_object() as progress:
-            task_id = progress.add_task('正在获取账号主页数据', total=None)
+            progress.add_task('正在获取账号主页数据', total=None)
             self.cursor = 0
             self.finished = False
             while not self.finished:
-                progress.update(task_id)
                 if (items_page := self._request_items_page(sec_user_id)):
                     if not items_page == [None]:
                         items.extend(items_page)
