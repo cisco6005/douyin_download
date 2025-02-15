@@ -88,9 +88,10 @@ class Scheduler:
                 self.cookie.update()
                 self.download_recorder.read()
                 print(f'[{CYAN}]\n开始提取上次未下载完作品数据')
+                account_name = account['name']
                 account_id = account['id']
                 account_mark = account['mark']
-                print(f'[{CYAN}]账号标识：{account_mark}；账号 ID：{account_id}')
+                print(f'[{CYAN}]账号标识：{account_mark}；账号昵称：{account_name}；账号 ID：{account_id}')
                 self.download_recorder.open_()
                 self.download.download_files(items, account_id, account_mark)
                 self.download_recorder.f_obj.close()
@@ -117,8 +118,9 @@ class Scheduler:
             print(f'[{CYAN}]\n开始提取作品数据')
             self.parse.extract_account(account, items[0])
             account_id = account['id']
+            account_name = account['name']
             account_mark = account['mark']
-            print(f'[{CYAN}]账号标识：{account_mark}；账号 ID：{account_id}')
+            print(f'[{CYAN}]账号昵称：{account_name}；账号 ID：{account_id}')
             items = self.parse.extract_items(items, account['earliest_date'], account['latest_date'])
             print(f'[{CYAN}]当前账号作品数量: {len(items)}')
             self.download_items.save(account, items)
