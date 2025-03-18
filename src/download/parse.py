@@ -59,6 +59,7 @@ class Parse:
     def _extract_video(self, video: dict, result: dict):
         '''提取视频作品信息'''
         result['type'] = '视频'
+        result['format'] = '.'+self._extract_value(video, 'format')
         result['share_url'] = f'https://www.douyin.com/video/{result["id"]}'
         result['downloads'] = self._extract_value(
             video, 'play_addr.url_list[0]')

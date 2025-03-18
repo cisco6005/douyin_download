@@ -57,6 +57,7 @@ class Download:
             desc = item['desc']
             name = self.cleaner.filter_name(self.settings.split.join(
                 item[key] for key in self.settings.name_format))
+            format = item['format']
             if (type := item['type']) == '图集':
                 for index, info in enumerate(item['downloads'], start=1):
                     if (task := self._generate_task_image(id, desc, name, index, info[0], info[1], info[2], save_folder)) is not None:
@@ -65,7 +66,7 @@ class Download:
                 url = item['downloads']
                 width = item['width']
                 height = item['height']
-                if (task := self._generate_task_video(id, desc, name, url, width, height, save_folder)) is not None:
+                if (task := self._generate_task_video(id, desc, name, format, url, width, height, save_folder)) is not None:
                     tasks.append(task)
         return tasks
 
@@ -79,12 +80,12 @@ class Download:
         else:
             return (url, path, show, id, width, height)
 
-    def _generate_task_video(self, id: str, desc: str, name: str, url: str, width: int, height: int, save_folder: str):
+    def _generate_task_video(self, id: str, desc: str, name: str, format: str, url: str, width: int, height: int, save_folder: str):
         '''生成视频下载任务信息'''
         show = f'视频 {id} {desc[:15]}'
         if id in self.download_recorder.records:
             print(f'[{CYAN}]{show} 存在下载记录，跳过下载')
-        elif exists(path := join_path(save_folder, f'{name}.mp4')):
+        elif exists(path := join_path(save_folder, name+format)):
             print(f'[{CYAN}]{show} 文件已存在，跳过下载')
         else:
             return (url, path, show, id, width, height)
