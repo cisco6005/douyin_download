@@ -57,7 +57,7 @@ class Download:
             desc = item['desc']
             name = self.cleaner.filter_name(self.settings.split.join(
                 item[key] for key in self.settings.name_format))
-            format = item['format']
+            format = item.get('format') # 图片任务没有这个字段，在下面直接设置为 .jpeg
             if (type := item['type']) == '图集':
                 for index, info in enumerate(item['downloads'], start=1):
                     if (task := self._generate_task_image(id, desc, name, index, info[0], info[1], info[2], save_folder)) is not None:
