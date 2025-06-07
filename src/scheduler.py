@@ -9,6 +9,8 @@ from rich import print
 from rich.prompt import Prompt
 from textwrap import dedent
 import subprocess
+from time import sleep
+from random import randint
 
 from .config import (
     PROJECT_ROOT,
@@ -103,6 +105,10 @@ class Scheduler:
         accounts = self.settings.accounts
         print(f'[{CYAN}]共有 {len(accounts)} 个账号的作品等待下载')
         for num, account in enumerate(accounts, start=1):
+            if num % 5 == 0:
+                sleep_time = randint(20, 180)
+                print(f'[{CYAN}]已处理 {num-1} 个账号，等待 {sleep_time} 秒后继续')
+                sleep(sleep_time)
             self.cookie.update()
             self._deal_account(num, account)
 
