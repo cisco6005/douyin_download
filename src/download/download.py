@@ -120,7 +120,7 @@ class Download:
             color = YELLOW
         else:
             color = GREEN
-        print(f'[{GREEN}]{show} [{color}]清晰度：{width}×{height} [{GREEN}]下载成功')
+        print(f'[{GREEN}]{show} [{color}]清晰度：{width}×{height}[{GREEN}] 下载完成 ({path.stat().st_size / (1024 * 1024):.2f} MB)')
         self.download_recorder.save(id)
 
     def _progress_object(self):
