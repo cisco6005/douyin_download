@@ -8,6 +8,7 @@ from rich.progress import (
     TextColumn,
     TimeRemainingColumn,
 )
+from pathlib import Path
 from rich import print
 from yarl import URL
 from asyncio import Semaphore, gather, run, create_task, TimeoutError
@@ -120,7 +121,7 @@ class Download:
             color = YELLOW
         else:
             color = GREEN
-        print(f'[{GREEN}]{show} [{color}]清晰度：{width}×{height}[{GREEN}] 下载完成 ({path.stat().st_size / (1024 * 1024):.2f} MB)')
+        print(f'[{GREEN}]{show} [{color}]清晰度：{width}×{height}[{GREEN}] 下载完成 ({Path(path).stat().st_size / (1024 * 1024):.2f} MB)')
         self.download_recorder.save(id)
 
     def _progress_object(self):
