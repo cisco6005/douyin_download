@@ -97,7 +97,11 @@ class Download:
         '''下载 url 对应文件'''
         async with sem:
             try:
-                async with ClientSession(headers=self.settings.headers, timeout=ClientTimeout(TIMEOUT)) as session:
+                async with ClientSession(
+                    headers=self.settings.headers,
+                    timeout=ClientTimeout(TIMEOUT),
+                    proxy='http://127.0.0.1:7897',
+                ) as session:
                     async with session.get(URL(url, encoded=True)) as response:
                         if not (content_length := int(response.headers.get('content-length', 0))):
                             print(f'[{YELLOW}]{show} {url} 响应内容为空')
