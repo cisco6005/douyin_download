@@ -16,6 +16,9 @@
 
 项目使用的第三方 python 库有：rich、requests、aiohttp、py_mini_racer，可使用 pip install XXX 命令安装。
 
+**注意**：douyin_download/src/download/download.py 第 103 行 “proxy='http://127.0.0.1:7897', ” 这里使用了 vpn，若 vpn 不匹配会出现问题（若不需要 vpn，直接删除这行代码即可）。
+![](images/image.png)
+
 ## 配置文件说明
 
 | 条目            | 说明                                                                                                 |
